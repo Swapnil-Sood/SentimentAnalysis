@@ -1,6 +1,21 @@
 import nltk
 from nltk.tokenize import word_tokenize
 import numpy as np
+import random
+	
+def test_data():
+	tweets = open('test_tweets.txt','w')
+	polarity =open('test_polarity.txt','w')
+	with open('twitter-2016test-A.txt') as fi:
+		for line in fi:
+			pol = line.split('\t')[1]
+			tweet = line.split('\t')[-2]
+			tweet = tweet.translate(str.maketrans({'"':None}))
+			tweets.write(str(tweet))
+			tweets.write('\n')
+			polarity.write(pol)
+			polarity.write('\n')
+test_data()   
 	
 def val_data():
 	tweets= open('val_tweets.txt','w')
@@ -13,6 +28,15 @@ def val_data():
 	        polarity.write(pol)
 	        polarity.write('\n')
 val_data()
+
+
+def shufle():
+	lines = open('twitter-2016train-A.txt').readlines()
+	random.shuffle(lines)
+	open('datafile.txt', 'w').writelines(lines)
+
+
+shufle()
 def testdata():
 	a= [x.split('\t')[2] for x in open('datafile.txt').readlines()]
 	f = open('tweets.txt','w')
