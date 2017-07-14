@@ -87,7 +87,7 @@ with tf.Graph().as_default():
 
 
 
-
+# Attention
 	M = tf.tanh(tf.add(tf.einsum("aij,j->ai", bi_lstm1, W),b))
 	a = tf.nn.softmax(M)
 	r = tf.einsum("aij,ai->aj", bi_lstm1, a)
@@ -118,7 +118,7 @@ with tf.Graph().as_default():
 	    
 
 
-
+#concatenation
 X_trainw = np.array(X_trainw)
 X_traing = np.array(X_traing)
 X_train = np.concatenate((X_traing,X_trainw),axis=1)
@@ -128,6 +128,7 @@ X_testg = np.array(X_testg)
 X_test = np.concatenate((X_testg,X_testw),axis=1)
 Y_test = np.array(test_yg)
 
+# one hot to categorical
 Y_train = [np.argmax(j)+1 for j in Y_train]
 Y_test = [np.argmax(j)+1 for j in Y_test]
 Y_train = np.array(Y_train)

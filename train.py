@@ -7,7 +7,7 @@ from tensorflow.contrib import rnn
 from preprocess import fn_glove
 import numpy as np
 
-train_xg,train_yg,val_xg,val_yg,test_xg,test_yg = fn_glove()
+train_xg,train_yg,val_xg,val_yg,_,_ = fn_glove()
 
 
 
@@ -40,7 +40,7 @@ with tf.Graph().as_default():
 	T = n
 	L = 64
 	learning_rate = 0.001
-	training_iters = 100000 #found by tuning
+	training_iters = 100000
 	batch_size = 200
 	display_step = 10
 	n_classes = 3 
@@ -78,8 +78,7 @@ with tf.Graph().as_default():
 	   
 
 
-
-
+# Attention
 	M = tf.tanh(tf.add(tf.einsum("aij,j->ai", bi_lstm1, W),b))
 	a = tf.nn.softmax(M)
 	r = tf.einsum("aij,ai->aj", bi_lstm1, a)
